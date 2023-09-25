@@ -1,7 +1,9 @@
+const HttpError = require("../helpers/errors");
+
 const errorHandler = (error, req, res, next) => {
   console.log(error);
 
-  if (error instanceof RecruitAssessError) {
+  if (error instanceof HttpError) {
     return res.status(error.status).json({ message: error.message });
   }
   

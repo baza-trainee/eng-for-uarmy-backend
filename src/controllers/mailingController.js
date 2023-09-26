@@ -6,11 +6,11 @@ const sendData = async (req, res, next) => {
     sendEmail({
         to: 'antifishka.zp@gmail.com',
         subject: 'New request from the Eng for UArmy form',
-        html: `<h2>User data:</h2>
-        <p>${name}</p>
-        <p>${email}</p>
-        <p>${requestType}</p>
-        <p>${request}</p>
+        html: `<h2>Дані про користувача:</h2>
+        <p>Ім'я: ${name}</p>
+        <p>Електронна пошта: ${email}</p>
+        <p>Тип запиту: ${requestType}</p>
+        <p>Запит: ${request}</p>
         `,
     });
 

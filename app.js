@@ -11,6 +11,6 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/send-data', mailingRouter);
+app.use('/api/contact-us', mailingRouter);
 
 module.exports = app;

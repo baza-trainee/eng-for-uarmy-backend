@@ -4,12 +4,17 @@ const sendData = async (req, res, next) => {
     const { email, name, request, requestType } = req.body;
 
     sendEmail({
-        to: 'antifishka.zp@gmail.com', // engforuarmy@gmail.com
-        subject: 'User data',
-        html: `<p>User data: ${email} ${name} ${request} ${requestType}</p>`,
+        to: 'antifishka.zp@gmail.com',
+        subject: 'New request from the Eng for UArmy form',
+        html: `<h2>Дані про користувача:</h2>
+        <p>Ім'я: ${name}</p>
+        <p>Електронна пошта: ${email}</p>
+        <p>Тип запиту: ${requestType}</p>
+        <p>Запит: ${request}</p>
+        `,
     });
 
-    res.status(200).json({ message: 'Data sent successful' }); 
+    res.status(201).json({ message: 'Data send success' }); 
 };
 
 module.exports = {

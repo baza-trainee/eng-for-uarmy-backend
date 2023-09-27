@@ -14,7 +14,7 @@ const sendData = async (req, res, next) => {
         `,
     });
 
-    res.status(201).json({ message: 'Data send success' }); 
+    res.status(201).json({ message: 'Email sent success' }); 
 };
 
 module.exports = {

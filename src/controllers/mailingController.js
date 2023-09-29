@@ -1,5 +1,4 @@
 const sendEmail = require('../helpers/sendEmail');
-const { PORT, SENDGRID_API_KEY } = process.env;
 
 const sendData = async (req, res, next) => {
     const { email, name, request, requestType } = req.body;
@@ -17,8 +16,6 @@ const sendData = async (req, res, next) => {
 
     res.status(201).json({
         message: 'Email sent success',
-        port: PORT, 
-        sendGridKey: SENDGRID_API_KEY,
     }); 
 };
 

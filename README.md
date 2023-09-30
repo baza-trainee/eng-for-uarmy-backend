@@ -12,8 +12,7 @@
 
 ```
   PORT=8081
-  DB_HOST=<your MongoDB connection string>
-  SENDGRID_API_KEY==<your SendGrid API key>
+  SENDGRID_API_KEY=<your SendGrid API key>
 ```
 
 - You can then start the server with:
@@ -32,7 +31,7 @@ This will run the server in production mode, which serves the API at http://loca
 
 ## API Documentation
 
-🔗 Base url: https://eng-for-uarmy-backend.vercel.app
+🔗 Base url: https://eng-for-uarmy-backend.onrender.com
 
 ## Endpoints
 

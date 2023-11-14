@@ -27,4 +27,8 @@ module.exports = class HttpError extends Error {
     static ConflictError(message = "Conflict") {
         return new HttpError(409, message);
     }
+
+    static LimitError(message = "Too Many Requests") {
+        return new HttpError(429, message);
+    }
 };

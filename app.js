@@ -11,7 +11,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 // Налаштування ліміту запитів (2 запити на 1 хвилину)
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 хвилина
-  max: 2, // Максимальна кількість запитів за вказаний період часу
+  max: 4, // Максимальна кількість запитів за вказаний період часу (2 OPTIONS + 2 POST)
   message: 'Too many requests from this IP, please try again later.',
 });
 

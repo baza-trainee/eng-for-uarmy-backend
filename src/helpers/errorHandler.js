@@ -1,15 +1,10 @@
-const HttpError = require("../helpers/errors");
+// const HttpError = require("./HttpError");
 
-const errorHandler = (error, req, res, next) => {
-  console.log(error);
+const errorHandler = (err, req, res, next) => {
+  console.log(err);
 
-  if (error instanceof HttpError) {
-    return res.status(error.status).json({ message: error.message });
-  }
-  
-  res.status(500).json({ message: error.message });
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
 };
 
-module.exports = {
-  errorHandler,
-};
+module.exports = errorHandler

@@ -5,7 +5,7 @@ const rateLimit = require("express-rate-limit");
 const mailingRouter = require("./src/routes/api/mailingRouter");
 const authRouter = require("./src/routes/api/authRouter");
 const errorHandler = require("./src/helpers/errorHandler");
-const cardsRouter = require("./src/routes/api/cardRouter");
+const reviewRouter = require("./src/routes/api/reviewRouter");
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use(express.static("public"));
 
 app.use("/api/contact-us", mailingRouter);
 app.use("/api/auth", authRouter);
-app.use("/api", cardsRouter);
+app.use("/api/admin", reviewRouter);
 
 app.use(errorHandler);
 

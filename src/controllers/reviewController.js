@@ -1,4 +1,5 @@
-const Review = require("../models/card");
+const Review = require("../models/review");
+const HttpError = require("../helpers/HttpError");
 
 const reviewController = {
   createReview: async (req, res) => {
@@ -54,7 +55,7 @@ const reviewController = {
       { $set: updates },
       { new: true }
     );
-    const HttpError = require("../helpers/HttpError");
+    
     if (!updatedReview) {
       throw new HttpError(404, "Review not found");
     }
@@ -63,7 +64,7 @@ const reviewController = {
 
   deleteReview: async (req, res) => {
     const deletedReview = await Review.findByIdAndDelete(req.params._id);
-    const HttpError = require("../helpers/HttpError");
+  
     if (!deletedReview) {
       throw new HttpError(404, "Review not found");
     }

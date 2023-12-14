@@ -13,6 +13,8 @@
 ```
   PORT=8081
   SENDGRID_API_KEY=<your SendGrid API key>
+  DB_HOST=<your MongoDB connection string>
+  JWT_SECRET=<a secret string for JSON web tokens>
 ```
 
 - You can then start the server with:

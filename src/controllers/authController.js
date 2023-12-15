@@ -40,7 +40,16 @@ const login = async (req, res) => {
   res.status(201).json({ admin: adminWithToken});
 };
 
+const logout = async (req, res) => { 
+  const { _id } = req.admin;
+
+  await Admin.findByIdAndUpdate(_id, { token: null });
+
+  res.status(204).json();
+};
+
 module.exports = {
   signup,
   login,
+  logout,
 }

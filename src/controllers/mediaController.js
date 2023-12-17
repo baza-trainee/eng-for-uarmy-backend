@@ -1,10 +1,9 @@
 const { Media } = require('../models');
 const cloudinary = require('../helpers/cloudinary')
-const Jimp = require('jimp');
 const path = require('path');
 const fs = require('fs/promises');
 
-const logoDir = path.resolve("public", "mediaLogo");
+// const logoDir = path.resolve("public", "mediaLogo");
 
 
 const getAllMedias = async (req, res) => {
@@ -61,9 +60,11 @@ const createMedia = async (req, res) => {
 
 const updatedMedia = async (req, res) => {
     const mediaId = req.params.id;
-    // const {description, logoImg, mediaURL, type} = req.body;
+    const { path: oldPath } = req.file;
+    const fileData = await cloudinary.uploader.upload(oldPath, { folder: "medias" });
+    await fs.unlink(oldPath);
     try{
-    const updatedMedia = await Media.findByIdAndUpdate(mediaId, req.body, { new: true });
+        const updatedMedia = await Media.findByIdAndUpdate(mediaId, { ...req.body, logoURL: fileData.url }, { new: true });
     if (!updatedMedia) {
     return res.status(404).json({message: 'Media not updated'})
     }

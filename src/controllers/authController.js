@@ -35,12 +35,29 @@ const login = async (req, res) => {
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
-  const adminWithToken = await Admin.findByIdAndUpdate(admin._id, { token }, {new: true});
+  const adminWithToken = await Admin.findByIdAndUpdate(admin._id, { token }, { new: true })
+    .select({ password: 0 });
      
   res.status(201).json({ admin: adminWithToken});
+};
+
+const logout = async (req, res) => { 
+  const { _id } = req.admin;
+
+  await Admin.findByIdAndUpdate(_id, { token: null });
+
+  res.status(204).json();
+};
+
+const current = async (req, res) => { 
+  const admin = req.admin;
+
+  res.status(200).json({ admin });
 };
 
 module.exports = {
   signup,
   login,
+  logout,
+  current,
 }

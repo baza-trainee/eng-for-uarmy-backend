@@ -1,10 +1,6 @@
 const { Media } = require('../models');
 const cloudinary = require('../helpers/cloudinary')
-const path = require('path');
 const fs = require('fs/promises');
-
-// const logoDir = path.resolve("public", "mediaLogo");
-
 
 const getAllMedias = async (req, res) => {
     const { lang, page = 1, limit = 6 } = req.query;
@@ -38,16 +34,6 @@ const createMedia = async (req, res) => {
     const { path: oldPath } = req.file;
     const fileData = await cloudinary.uploader.upload(oldPath, { folder: "medias" });
     await fs.unlink(oldPath);
-    // const { path: tempUpload, filename } = req.file;
-    // const newPath = path.join(logoDir, filename);
-    
-    // Jimp.read(tempUpload, (_, filename) => {
-        //     filename.resize(250, 250).write(newPath);
-        // });
-        
-    // await fs.rename(tempUpload, newPath);
-    // const logoURL = path.join("mediaLogo", filename);
-
     try {
         const newMedia = await Media.create({ ...req.body, logoURL: fileData.url });
         return res.status(201).json(newMedia);

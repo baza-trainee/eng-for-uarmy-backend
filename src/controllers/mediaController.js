@@ -1,8 +1,20 @@
 const { Media } = require('../models');
+const cloudinary = require('../helpers/cloudinary')
+const Jimp = require('jimp');
+const path = require('path');
+const fs = require('fs/promises');
+
+const logoDir = path.resolve("public", "mediaLogo");
+
 
 const getAllMedias = async (req, res) => {
+    const { lang, page = 1, limit = 6 } = req.query;
+    
     try {
-        const medias = await Media.find();
+        const skip = (page - 1) * limit;
+        const medias = lang === 'en'
+            ? await Media.find({ enDesc: { $exists: true } }, '', { skip, limit })
+            : await Media.find({ }, '', { skip, limit })
         return res.status(200).json(medias);
     } catch (err) {
         console.log(err);
@@ -16,16 +28,29 @@ const getMediaById = async (req, res) => {
         if (!media) {
         return res.status(404).json({message: `Media with id: ${mediaId} not found`})
         }
-        return res.status(200).json(media);
+        return res.status(300).json(media);
     } catch (err) {
         console.log(err);
         return res.status(500).json({error: err.message});
     }
 }
+
 const createMedia = async (req, res) => {
-    const { description, logo } = req.body;
+    const { path: oldPath } = req.file;
+    const fileData = await cloudinary.uploader.upload(oldPath, { folder: "medias" });
+    await fs.unlink(oldPath);
+    // const { path: tempUpload, filename } = req.file;
+    // const newPath = path.join(logoDir, filename);
+    
+    // Jimp.read(tempUpload, (_, filename) => {
+        //     filename.resize(250, 250).write(newPath);
+        // });
+        
+    // await fs.rename(tempUpload, newPath);
+    // const logoURL = path.join("mediaLogo", filename);
+
     try {
-        const newMedia = await Media.create({ description, logo });
+        const newMedia = await Media.create({ ...req.body, logoURL: fileData.url });
         return res.status(201).json(newMedia);
     } catch (err) {
         console.log(err);
@@ -33,11 +58,12 @@ const createMedia = async (req, res) => {
     }
 }
 
+
 const updatedMedia = async (req, res) => {
-    try{
     const mediaId = req.params.id;
-    const {description, logoURL} = req.body;
-    const updatedMedia = await Media.findByIdAndUpdate(mediaId, { description, logoURL }, { new: true });
+    // const {description, logoImg, mediaURL, type} = req.body;
+    try{
+    const updatedMedia = await Media.findByIdAndUpdate(mediaId, req.body, { new: true });
     if (!updatedMedia) {
     return res.status(404).json({message: 'Media not updated'})
     }
@@ -63,4 +89,4 @@ const deleteMedia = async (req, res) => {
 }
 
 
-modules.export = {getAllMedias, getMediaById, createMedia, updatedMedia, deleteMedia}
+module.exports = {getAllMedias, getMediaById, createMedia, updatedMedia, deleteMedia}

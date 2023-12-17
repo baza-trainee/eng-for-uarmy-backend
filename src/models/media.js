@@ -2,13 +2,19 @@ const  { model, Schema } = require('mongoose');
 const handleMongooseError = require("../helpers/handleMongooseError");
 
 const mediaSchema = new Schema({
-    description: {
+    ukDesc: {
         type: String,
-        required: [true, "The description is required"]
+    },
+    enDesc: {
+        type: String,
     },
     logoURL: {
         type: String,
-        required: [true, "The logo is required"]
+        required: [true, "The logo URL is required"]
+    },
+    mediaURL: {
+        type: String,
+        required: [true, "The media URL is required"]
     }
 }, { versionKey: false, timestamps: true })
 

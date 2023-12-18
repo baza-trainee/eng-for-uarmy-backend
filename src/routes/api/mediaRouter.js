@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../../helpers/uploader")
+const { upload } = require("../../middlewares")
 const { mediaControllers } = require('../../controllers')
 
 router.get("/medias", mediaControllers.getAllMedias); // "/medias?lang=X&page=X&limit=X"

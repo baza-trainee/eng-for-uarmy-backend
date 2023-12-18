@@ -6,6 +6,7 @@ const mailingRouter = require("./src/routes/api/mailingRouter");
 const authRouter = require("./src/routes/api/authRouter");
 const errorHandler = require("./src/helpers/errorHandler");
 const reviewRouter = require("./src/routes/api/reviewRouter");
+const mediaRouter = require("./src/routes/api/mediaRouter");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static("public"));
 app.use("/api/contact-us", mailingRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/admin", reviewRouter);
+app.use("/api/admin", mediaRouter);
 
 app.use(errorHandler);
 

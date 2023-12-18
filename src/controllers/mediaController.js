@@ -12,7 +12,6 @@ const getAllMedias = async (req, res) => {
             : await Media.find({ }, '', { skip, limit })
         return res.status(200).json(medias);
     } catch (err) {
-        console.log(err);
         return res.status(500).json({error: err.message});
     }
 }

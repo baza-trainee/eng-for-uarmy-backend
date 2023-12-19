@@ -2,11 +2,11 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+
 const mailingRouter = require("./src/routes/api/mailingRouter");
 const authRouter = require("./src/routes/api/authRouter");
 const errorHandler = require("./src/helpers/errorHandler");
-const reviewRouter = require("./src/routes/api/reviewRouter");
-const mediaRouter = require("./src/routes/api/mediaRouter");
+const apiRoutes = require("./src/routes/api");
 
 const app = express();
 
@@ -28,8 +28,10 @@ app.use(express.static("public"));
 
 app.use("/api/contact-us", mailingRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/admin", reviewRouter);
-app.use("/api/admin", mediaRouter);
+app.use("/api/admin", apiRoutes.reviewRouter);
+app.use("/api/admin", apiRoutes.mediaRouter);
+app.use("/api/admin", apiRoutes.contactsRouter);
+app.use("/api/admin", apiRoutes.partnerRouter);
 
 app.use(errorHandler);
 

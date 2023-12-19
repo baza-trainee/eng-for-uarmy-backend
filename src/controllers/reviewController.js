@@ -1,4 +1,4 @@
-const Review = require("../models/card");
+const Review = require("../models/review");
 
 const reviewController = {
   createReview: async (req, res) => {

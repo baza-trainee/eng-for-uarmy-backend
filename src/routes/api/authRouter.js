@@ -1,12 +1,13 @@
 const express = require('express');
 const router = new express.Router();
 const { asyncWrapper } = require('../../helpers/asyncWrapper');
-const { signup, login, logout, current} = require('../../controllers/authController');
+const { authCtrl} = require('../../controllers');
 const { authMiddleware, userPostValidation } = require('../../middlewares');
 
-router.post('/signup', asyncWrapper(signup));
-router.post('/login', asyncWrapper(login));
-router.get('/logout', authMiddleware, asyncWrapper(logout));
-router.get('/current', authMiddleware, asyncWrapper(current));
+router.post('/signup', asyncWrapper(authCtrl.signup));
+router.post('/login', asyncWrapper(authCtrl.login));
+router.get('/logout', authMiddleware, asyncWrapper(authCtrl.logout));
+router.get('/current', authMiddleware, asyncWrapper(authCtrl.current));
+router.post('/resset-password', authMiddleware, asyncWrapper(authCtrl.ressetPassword));
 
 module.exports = router;

@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const { authMiddleware } = require('../../middlewares');
 const reviewController = require("../../controllers/reviewController");
+// only for loggedIn admin
+router.use(authMiddleware);
 
 router.post("/reviews", reviewController.createReview);
 router.get("/reviews", reviewController.getAllReviews);

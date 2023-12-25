@@ -76,9 +76,10 @@ const ressetPassword = async (req, res) => {
     `,
   });
 
-  res.status(201).json({ message: 'Email sent success' });
+  const hashPassword = await bcrypt.hash(newPassword, 10);
   
-  await Admin.findByIdAndUpdate(admin._id, { password: newPassword});
+  await Admin.findByIdAndUpdate(admin._id, { password: hashPassword });
+  res.status(201).json({ message: 'Email sent success' });
 };
 
 module.exports = {

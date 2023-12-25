@@ -8,6 +8,6 @@ router.post('/signup', asyncWrapper(authCtrl.signup));
 router.post('/login', asyncWrapper(authCtrl.login));
 router.get('/logout', authMiddleware, asyncWrapper(authCtrl.logout));
 router.get('/current', authMiddleware, asyncWrapper(authCtrl.current));
-router.post('/resset-password', authMiddleware, asyncWrapper(authCtrl.ressetPassword));
+router.post('/resset-password', asyncWrapper(authCtrl.ressetPassword));
 
 module.exports = router;

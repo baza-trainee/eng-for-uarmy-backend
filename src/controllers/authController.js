@@ -3,7 +3,7 @@ const HttpError = require('../helpers/HttpError');
 const sendEmail = require('../helpers/sendEmail');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { v4: uuidv4 } = require('uuid');
+const generatePassword = require('../helpers/generatePassword');
 
 const signup = async (req, res) => { 
   const { email, password } = req.body;
@@ -66,7 +66,7 @@ const ressetPassword = async (req, res) => {
     throw new HttpError(401, "Email is wrong");
   };
 
-  const newPassword = uuidv4();
+  const newPassword = generatePassword(6);
 
   sendEmail({
     to: email,

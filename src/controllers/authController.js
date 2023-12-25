@@ -1,7 +1,9 @@
 const { Admin } = require('../models/admin');
-const HttpError = require("../helpers/HttpError");
+const HttpError = require('../helpers/HttpError');
+const sendEmail = require('../helpers/sendEmail');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const generatePassword = require('../helpers/generatePassword');
 
 const signup = async (req, res) => { 
   const { email, password } = req.body;
@@ -55,9 +57,35 @@ const current = async (req, res) => {
   res.status(200).json({ admin });
 };
 
+const ressetPassword = async (req, res) => { 
+  const { email } = req.body;
+
+  const admin = await Admin.findOne({ email });
+
+  if (!admin) {
+    throw new HttpError(401, "Email is wrong");
+  };
+
+  const newPassword = generatePassword(6);
+
+  sendEmail({
+    to: email,
+    subject: 'Your new password for Eng for UArmy',
+    html: `
+      <p>Пароль: ${newPassword}</p>
+    `,
+  });
+
+  const hashPassword = await bcrypt.hash(newPassword, 10);
+  
+  await Admin.findByIdAndUpdate(admin._id, { password: hashPassword });
+  res.status(201).json({ message: 'Email sent success' });
+};
+
 module.exports = {
   signup,
   login,
   logout,
   current,
-}
+  ressetPassword,
+};

@@ -75,4 +75,4 @@ const deleteMedia = async (req, res) => {
 }
 
 
-module.exports = {getAllMedias, getMediaById, createMedia, updatedMedia, deleteMedia}
+module.exports = { getAllMedias, getMediaById, createMedia, updatedMedia, deleteMedia };

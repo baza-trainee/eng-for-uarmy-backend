@@ -1,7 +1,7 @@
 const express = require('express');
 const router = new express.Router();
-const { asyncWrapper } = require('../../helpers/asyncWrapper');
-const { authCtrl} = require('../../controllers');
+const { asyncWrapper } = require('../../helpers');
+const { authCtrl } = require('../../controllers');
 const { authMiddleware, userPostValidation } = require('../../middlewares');
 
 router.post('/signup', asyncWrapper(authCtrl.signup));

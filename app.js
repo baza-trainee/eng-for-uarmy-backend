@@ -21,7 +21,7 @@ app.use("/api/admin", apiRoutes.reviewRouter);
 app.use("/api/admin", apiRoutes.mediaRouter);
 app.use("/api/admin", apiRoutes.contactsRouter);
 app.use("/api/admin", apiRoutes.partnerRouter);
-app.use("/api/admin/projects", apiRoutes.projectsRouter);
+app.use("/api/admin", apiRoutes.projectsRouter);
 
 app.use(errorHandler);
 

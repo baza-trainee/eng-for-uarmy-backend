@@ -3,7 +3,8 @@ const HttpError = require('../helpers/HttpError');
 const sendEmail = require('../helpers/sendEmail');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const generatePassword = require('../helpers/generatePassword');
+const { generatePassword } = require('../helpers');
+const newPasswordMarkup = require('../helpers/markupEmail')
 
 const signup = async (req, res) => { 
   const { email, password } = req.body;
@@ -71,9 +72,7 @@ const ressetPassword = async (req, res) => {
   sendEmail({
     to: email,
     subject: 'Your new password for Eng for UArmy',
-    html: `
-      <p>Пароль: ${newPassword}</p>
-    `,
+    html: newPasswordMarkup,
   });
 
   const hashPassword = await bcrypt.hash(newPassword, 10);

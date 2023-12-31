@@ -9,7 +9,7 @@ const signup = async (req, res) => {
   const { email, password } = req.body;
     
   const admin = await Admin.findOne({ email });
-    
+    console.log(admin);
   if (admin) {
     throw new HttpError(409, "Email in use");
   };
@@ -18,7 +18,7 @@ const signup = async (req, res) => {
     email,
     password,
   });
-
+console.log(newAdmin);
   res.status(201).json({ admin: newAdmin});
 };
 

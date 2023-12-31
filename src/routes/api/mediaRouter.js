@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { upload } = require("../../middlewares")
-const { mediaControllers } = require('../../controllers')
+const { upload } = require("../../middlewares");
+const { mediaControllers } = require('../../controllers');
 
 router.get("/medias", mediaControllers.getAllMedias); // "/medias?lang=X&page=X&limit=X"
 router.get("/medias/:id", mediaControllers.getMediaById); //"/medias/12345"

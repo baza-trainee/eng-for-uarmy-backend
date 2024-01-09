@@ -15,11 +15,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
+app.use("/api/admin", apiRoutes.aboutUsRouter);
+app.use("/api/admin", apiRoutes.mediaRouter);
+app.use("/api/admin", apiRoutes.contactsRouter);
 app.use("/api/contact-us", apiRoutes.mailingRouter);
 app.use("/api/auth", apiRoutes.authRouter);
 app.use("/api/admin", apiRoutes.reviewRouter);
-app.use("/api/admin", apiRoutes.mediaRouter);
-app.use("/api/admin", apiRoutes.contactsRouter);
 app.use("/api/admin", apiRoutes.partnerRouter);
 app.use("/api/admin", apiRoutes.projectsRouter);
 

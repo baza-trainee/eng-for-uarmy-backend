@@ -1,10 +1,9 @@
 const { Admin } = require('../models/admin');
 const HttpError = require('../helpers/HttpError');
-const sendEmail = require('../helpers/sendEmail');
+const { sendEmail, markupEmail } = require('../helpers');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { generatePassword } = require('../helpers');
-const newPasswordMarkup = require('../helpers/markupEmail')
 
 const signup = async (req, res) => { 
   const { email, password } = req.body;
@@ -72,7 +71,7 @@ const ressetPassword = async (req, res) => {
   sendEmail({
     to: email,
     subject: 'Your new password for Eng for UArmy',
-    html: newPasswordMarkup,
+    html: markupEmail(newPassword),
   });
 
   const hashPassword = await bcrypt.hash(newPassword, 10);

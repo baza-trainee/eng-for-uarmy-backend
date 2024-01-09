@@ -4,15 +4,13 @@ const { upload, isValidId, validateBody, authMiddleware } = require("../../middl
 const { projectsController } = require("../../controllers");
 const { schemas } = require("../../models/");
 
-router.get("/",
-	authMiddleware,
-	projectsController.getAllProjects);
-router.get("/:id",
-	authMiddleware,
+router.use(authMiddleware);
+
+router.get("/projects", projectsController.getAllProjects);
+router.get("/projects/:id",
 	isValidId,
 	projectsController.getProjectById);
-router.put("/:id",
-	authMiddleware,
+router.put("/projects/:id",
 	isValidId,
 	validateBody(schemas.updateSchema),
 	upload.single("imageUrl"),

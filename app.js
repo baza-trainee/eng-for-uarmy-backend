@@ -22,7 +22,7 @@ app.use("/api/contact-us", apiRoutes.mailingRouter);
 app.use("/api/auth", apiRoutes.authRouter);
 app.use("/api/admin", apiRoutes.reviewRouter);
 app.use("/api/admin", apiRoutes.partnerRouter);
-app.use("/api/admin/projects", apiRoutes.projectsRouter);
+app.use("/api/admin", apiRoutes.projectsRouter);
 
 app.use(errorHandler);
 

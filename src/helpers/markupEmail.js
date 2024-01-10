@@ -1,22 +1,23 @@
 const markupEmail = (newPassword) =>
     `<html>
         <head>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Furore:wght@400&family=Arial:wght@400,700&display=swap">
             <style>
                 @font-face {
                     font-family: 'Furore';
-                    src: url('https://eng-for-uarmy.onrender.com/fonts/Furore.woff2') format('truetype');
+                    src: url('https://eng-for-uarmy.onrender.com/fonts/Furore.woff2') format('woff2');
                     font-weight: 400;
                     font-style: normal;
                 }
                 @font-face {
                     font-family: 'Arial';
-                    src: url('https://eng-for-uarmy.onrender.com/fonts/ArialMT.woff2') format('truetype');
+                    src: url('https://eng-for-uarmy.onrender.com/fonts/ArialMT.woff2') format('woff2');
                     font-weight: 400;
                     font-style: normal;
                 }
                 @font-face {
                     font-family: 'Arial-Bold';
-                    src: url('https://eng-for-uarmy.onrender.com/fonts/Arial-BoldMT.woff2') format('truetype');
+                    src: url('https://eng-for-uarmy.onrender.com/fonts/Arial-BoldMT.woff2') format('woff2');
                     font-weight: 700;
                     font-style: normal;
                 }
